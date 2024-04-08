@@ -11,6 +11,14 @@ def get_rooms(db: Session):
     return db.query(Room).all()
 
 
+def delete_room(room_id: uuid, db: Session):
+    room = get_room(room_id, db)
+    db.delete(room)
+    db.commit()
+    message = f"room_id: {room_id} has been deleted successfully."
+    return message
+
+
 def create_room(db_room, db: Session):
     db.add(db_room)
     db.commit()

@@ -13,3 +13,4 @@ class RoomIn(Room):
 
 class RoomOut(RoomIn):
     room_id: UUID = Field(default=UUID)
+

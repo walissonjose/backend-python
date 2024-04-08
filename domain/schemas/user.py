@@ -8,9 +8,5 @@ class User(GenericModel):
     user_mail: EmailStr = Field(default="johndoe@mail.com")
 
 
-class UserIn(User):
-    user_id: UUID = Field(default=UUID)
-
-
 class UserOut(User):
     user_id: UUID = Field(default=UUID)

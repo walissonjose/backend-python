@@ -23,3 +23,8 @@ def get_rooms(db: Session = Depends(get_session)):
 @router.get("/room/{room_id}", summary="Get room by id", tags=[ROOM_TAG], response_model=RoomOut)
 def get_room(room_id: UUID, db: Session = Depends(get_session)):
     return room_service.get_room(room_id, db)
+
+
+@router.delete("/room/{room_id}", summary="Delete room by id", tags=[ROOM_TAG], response_model=str)
+def delete_room(room_id: UUID, db: Session = Depends(get_session)):
+    return room_service.delete_room(room_id, db)
