@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from domain.schemas.room import RoomIn as roomIn
-from domain.models.model import Room as roomModel
+from domain.models.room import Room as roomModel
 from repositories import room as room_repository
 
 

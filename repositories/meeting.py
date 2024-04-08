@@ -1,6 +1,6 @@
 import uuid
 from sqlalchemy.orm import Session
-from domain.models.model import Meeting
+from domain.models.meeting import Meeting
 
 
 def create_meeting(meeting: Meeting, db: Session):

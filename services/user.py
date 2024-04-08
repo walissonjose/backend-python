@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from domain.schemas.user import User as userCreate
-from domain.models.model import User as userModel
+from domain.models.user import User as userModel
 from repositories import user as user_repository
 
 

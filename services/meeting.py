@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-from domain.models.model import Meeting
+from domain.models.meeting import Meeting
 from domain.schemas.meeting import MeetingIn
 from repositories import meeting as meeting_repository
 from .user import get_user, get_users_by_id

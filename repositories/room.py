@@ -1,6 +1,6 @@
 import uuid
 from sqlalchemy.orm import Session
-from domain.models.model import Room
+from domain.models.room import Room
 
 
 def get_room(room_id: uuid, db: Session):

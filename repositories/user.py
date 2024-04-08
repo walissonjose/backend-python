@@ -2,7 +2,7 @@ import uuid
 
 from sqlalchemy.orm import Session
 
-from domain.models.model import User
+from domain.models.user import User
 
 
 def get_user(user_id: uuid, db: Session, ):
