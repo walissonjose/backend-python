@@ -9,6 +9,10 @@ def get_user(user_id: uuid, db: Session, ):
     return db.query(User).filter(User.user_id == user_id).first()
 
 
+def get_users(db: Session, ):
+    return db.query(User).all()
+
+
 def create_user(user: User, db: Session, ):
     db.add(user)
     db.commit()

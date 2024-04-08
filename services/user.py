@@ -15,6 +15,10 @@ def get_user(user_id: uuid, db: Session):
     return user
 
 
+def get_users(db: Session):
+    return user_repository.get_users(db)
+
+
 def get_user_by_email(email, db: Session):
     return user_repository.get_user_by_email(email, db)
 

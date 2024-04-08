@@ -1,30 +1,16 @@
 from uuid import UUID
 from .generic import GenericModel
-from pydantic import EmailStr
+from pydantic import EmailStr, Field
 
 
 class User(GenericModel):
-    user_name: str
-    user_mail: EmailStr
-
-    class Config:
-        from_attributes = True
-        json_schema_extra = {
-            "example": {
-                "name": "johndoe",
-                "email": "johndoe@mail.com.br"
-            }
-        }
+    user_name: str = Field(default="John Doe")
+    user_mail: EmailStr = Field(default="johndoe@mail.com")
 
 
 class UserIn(User):
-    user_id: UUID
+    user_id: UUID = Field(default=UUID)
 
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "user_id": "123e4567-e89b-12d3-a456-426614174000",
-                "user_name": "johndoe",
-                "user_mail": "johndoe@mail.com.br"
-            }
-        }
+
+class UserOut(User):
+    user_id: UUID = Field(default=UUID)
