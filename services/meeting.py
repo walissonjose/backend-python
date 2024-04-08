@@ -73,8 +73,7 @@ def add_participants(meeting_id, participants, db):
         if user not in meeting.participants:
             meeting.participants.append(user)
 
-    #check if the user is available at the time
+    # check if the user is available at the time
     user_check_availableness(list_users, meeting, get_meetings(db))
 
     return meeting_repository.add_participants(meeting, db)
-
