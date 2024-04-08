@@ -15,7 +15,7 @@ def create_room(room: RoomIn, db: Session = Depends(get_session)):
     return room_service.create_room(room, db)
 
 
-@router.get("/room", summary="Get all rooms", tags=[ROOM_TAG], response_model=list[RoomOut])
+@router.get("/rooms", summary="Get all rooms", tags=[ROOM_TAG], response_model=list[RoomOut])
 def get_rooms(db: Session = Depends(get_session)):
     return room_service.get_rooms(db)
 

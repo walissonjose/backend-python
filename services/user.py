@@ -11,8 +11,21 @@ from repositories import user as user_repository
 def get_user(user_id: uuid, db: Session):
     user = user_repository.get_user(user_id, db)
     if user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail=f"User not found")
     return user
+
+
+def get_users_by_id(user_ids: list[uuid], db: Session):
+    list_users = []
+    users_not_found = []
+    for user_id in user_ids:
+        user = user_repository.get_user(user_id, db)
+        if user is None:
+            users_not_found.append(user_id)
+            raise HTTPException(status_code=404, detail=f"The following users were not found: {users_not_found}")
+        list_users.append(user)
+    return list_users
+
 
 
 def get_users(db: Session):
