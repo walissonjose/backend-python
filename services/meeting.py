@@ -34,19 +34,23 @@ def create_meeting(meeting: MeetingIn, db: Session):
     return meeting_repository.create_meeting(meeting, db)
 
 
+def check_room_availableness(meeting, meetings, room):
+    for meet in meetings:
+        if meet.room_id == room.room_id:
+            if (meet.start_hour <= meeting.start_hour < meet.end_hour) or \
+                    (meet.start_hour < meeting.end_hour <= meet.end_hour) or \
+                    (meeting.start_hour <= meet.start_hour and meeting.end_hour >= meet.end_hour):
+                raise HTTPException(status_code=400, detail="Room not available at the time")
+
+
 def user_check_availableness(list_users, meeting, meetings):
     for user in list_users:
         for meet in meetings:
             if user in meet.participants:
-                if meet.start_hour <= meeting.start_hour <= meet.end_hour or meet.start_hour <= meeting.end_hour <= meet.end_hour:
+                if (meet.start_hour <= meeting.start_hour < meet.end_hour) or \
+                        (meet.start_hour < meeting.end_hour <= meet.end_hour) or \
+                        (meeting.start_hour <= meet.start_hour and meeting.end_hour >= meet.end_hour):
                     raise HTTPException(status_code=400, detail="User not available at the time")
-
-
-def check_room_availableness(meeting, meetings, room):
-    for meet in meetings:
-        if meet.room_id == room.room_id:
-            if meet.start_hour <= meeting.start_hour <= meet.end_hour or meet.start_hour <= meeting.end_hour <= meet.end_hour:
-                raise HTTPException(status_code=400, detail="Room not available at the time")
 
 
 def get_meeting(meeting_id, db):
@@ -74,6 +78,7 @@ def add_participants(meeting_id, participants, db):
             meeting.participants.append(user)
 
     # check if the user is available at the time
-    user_check_availableness(list_users, meeting, get_meetings(db))
+    meetings = meeting_repository.get_meetings(db)
+    user_check_availableness(list_users, meeting, meetings)
 
     return meeting_repository.add_participants(meeting, db)
