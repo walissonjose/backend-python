@@ -18,3 +18,7 @@ def get_room(room_id: uuid, db: Session):
     if room is None:
         raise HTTPException(status_code=404, detail="Room not found")
     return room
+
+
+def get_rooms(db: Session):
+    return room_repository.get_rooms(db)

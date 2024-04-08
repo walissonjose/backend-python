@@ -7,6 +7,10 @@ def get_room(room_id: uuid, db: Session):
     return db.query(Room).filter(Room.room_id == room_id).first()
 
 
+def get_rooms(db: Session):
+    return db.query(Room).all()
+
+
 def create_room(db_room, db: Session):
     db.add(db_room)
     db.commit()
