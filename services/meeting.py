@@ -22,5 +22,9 @@ def create_meeting(meeting: MeetingIn, db: Session):
     return meeting_repository.create_meeting(meeting, db)
 
 
+def get_meeting(meeting_id, db):
+    return meeting_repository.get_meeting(meeting_id, db)
+
+
 def add_participants(meeting, db):
     return None
